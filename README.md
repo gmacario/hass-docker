@@ -24,7 +24,7 @@ docker-compose up -d
 Inspect the Home Assistant configuration directory
 
 ```
-docker-compose exec ha ls -la /config
+docker-compose exec -T ha ls -la /config
 ```
 
 **NOTE**: If you are running the shell from MS Windows and the `docker exec` command
@@ -33,29 +33,32 @@ fails, prepend it with `winpty`.
 Display Home Assistant logfile
 
 ```
-docker-compose exec ha tail -f /config/home-assistant.log
+docker-compose exec -T ha tail -f /config/home-assistant.log
 ```
 
 Cleanup Home Assistant logfile
 
 ```
-docker-compose exec ha sh .c ". >/config/home-assistant.log"
+docker-compose exec -T ha sh .c ". >/config/home-assistant.log"
 ```
 
 Backup the configuration file
 
 ```
-docker cp homeassistantcompose_ha_1:/config configuration.yaml
+docker exec -T ha cat /config/configuration.yaml >hass-backup-configuration.yaml
 ```
 
-Install the configuration file and restart the service:
+Install the configuration file fetched from some private URL
+(restart Home Assistant to apply the new configuration):
 
 ```
-docker cp configuration.yaml homeassistantcompose_ha_1:/config
-docker-compose restart
+curl -L <URL> | \
+    docker exec -T ha sh -c "cat >/config/configuration.yaml" && \
+    docker-compose restart
 ```
 
-Then browse `http://$(docker-machine ip):8123`, for instance: <http://192.168.99.100:8123>
+Browse `http://$(docker-machine ip):8123/` (for instance: <http://192.168.99.100:8123>)
+to access the Web interface of Home Assistant.
 
 
 ### See also
