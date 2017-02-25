@@ -45,13 +45,13 @@ docker-compose exec ha sh .c ". >/config/home-assistant.log"
 Backup the configuration file
 
 ```
-docker cp hagmhome_ha_1:/config configuration.yaml
+docker cp homeassistantcompose_ha_1:/config configuration.yaml
 ```
 
 Install the configuration file and restart the service:
 
 ```
-docker cp configuration.yaml hagmhome_ha_1:/config
+docker cp configuration.yaml homeassistantcompose_ha_1:/config
 docker-compose restart
 ```
 
