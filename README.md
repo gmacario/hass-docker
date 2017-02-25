@@ -3,7 +3,7 @@
 Clone (or update) the project repository
 
 ```
-[ ! -e ha-gmhome ] && \
+[ ! -e home-assistant-compose ] && \
 git clone https://github.com/gmacario/home-assistant-compose
 cd home-assistant-compose && git pull --all --prune
 ```
