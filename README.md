@@ -53,7 +53,7 @@ Install the configuration file fetched from some private URL
 
 ```
 curl -L <URL> | \
-    docker exec -T ha sh -c "cat >/config/configuration.yaml" && \
+    docker-compose exec -T ha sh -c "cat >/config/configuration.yaml" && \
     docker-compose restart
 ```
 
