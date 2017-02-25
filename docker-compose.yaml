@@ -1,0 +1,23 @@
+# See also:
+# - Compose file reference: https://docs.docker.com/compose/compose-file/
+
+version: '2'
+
+services:
+  ha:
+    image: "homeassistant/home-assistant"
+    ports:
+      - "8123:8123"
+    # networks:
+    #  - outside
+    volumes:
+      - config:/config
+
+# networks:
+#   outside:
+#     driver: bridge
+
+volumes:
+  config:
+
+# EOF
